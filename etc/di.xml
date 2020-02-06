@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * di
+ *
+ * @copyright Copyright © 2020 landofcoder. All rights reserved.
+ * @author    landofcoder@gmail.com
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Lof\HieuStudentManage\Api\IndexRepositoryInterface" type="Lof\HieuStudentManage\Model\IndexRepository"/>
+    <preference for="Lof\HieuStudentManage\Api\Data\IndexInterface" type="Lof\HieuStudentManage\Model\Data\Index"/>
+    <preference for="Lof\HieuStudentManage\Api\Data\IndexSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+    <virtualType name="Lof\HieuStudentManage\Model\ResourceModel\Index\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">lof_hieustudentmanage_index</argument>
+            <argument name="resourceModel" xsi:type="string">Lof\HieuStudentManage\Model\ResourceModel\Index\Collection</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="lof_hieustudentmanage_index_listing_data_source" xsi:type="string">Lof\HieuStudentManage\Model\ResourceModel\Index\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

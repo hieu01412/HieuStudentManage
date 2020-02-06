@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+	<menu>
+		<add id="Lof::top_level" title="Student" module="Lof_HieuStudentManage" sortOrder="19" resource="Magento_Backend::content"/>
+		<add id="Lof_HieuStudentManage::student_index" title="All Student" module="Lof_HieuStudentManage" sortOrder="9999" resource="Lof_HieuStudentManage::student_index" parent="Lof::top_level" action="studentmanage/student/index"/>
+	</menu>
+</config>

@@ -3,32 +3,25 @@
 
 namespace Lof\HieuStudentManage\Controller\Adminhtml\Student;
 
+use Magento\Backend\App\Action\Context;
+
 class Index extends \Magento\Backend\App\Action
 {
+    protected $resultPageFactory = false;
 
-    protected $resultPageFactory;
-
-    /**
-     * Constructor
-     *
-     * @param \Magento\Backend\App\Action\Context  $context
-     * @param \Magento\Framework\View\Result\PageFactory $resultPageFactory
-     */
     public function __construct(
-        \Magento\Backend\App\Action\Context $context,
+        Context $context,
         \Magento\Framework\View\Result\PageFactory $resultPageFactory
     ) {
-        $this->resultPageFactory = $resultPageFactory;
         parent::__construct($context);
+        $this->resultPageFactory = $resultPageFactory;
     }
 
-    /**
-     * Execute view action
-     *
-     * @return \Magento\Framework\Controller\ResultInterface
-     */
     public function execute()
     {
-        return $this->resultPageFactory->create();
+        $resultPage = $this->resultPageFactory->create();
+        $resultPage->getConfig()->getTitle()->prepend((__('Student')));
+
+        return $resultPage;
     }
 }

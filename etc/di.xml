@@ -14,14 +14,14 @@
     <preference for="Lof\HieuStudentManage\Api\Data\IndexSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
     <virtualType name="Lof\HieuStudentManage\Model\ResourceModel\Index\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
         <arguments>
-            <argument name="mainTable" xsi:type="string">lof_hieustudentmanage_index</argument>
-            <argument name="resourceModel" xsi:type="string">Lof\HieuStudentManage\Model\ResourceModel\Index\Collection</argument>
+            <argument name="mainTable" xsi:type="string">hieustudentmanage_studentinfo</argument>
+            <argument name="resourceModel" xsi:type="string">Lof\HieuStudentManage\Model\ResourceModel\Student\</argument>
         </arguments>
     </virtualType>
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
             <argument name="collections" xsi:type="array">
-                <item name="lof_hieustudentmanage_index_listing_data_source" xsi:type="string">Lof\HieuStudentManage\Model\ResourceModel\Index\Grid\Collection</item>
+                <item name="studentmanage_student_listing_data_source" xsi:type="string">Lof\HieuStudentManage\Model\ResourceModel\Student\Grid\Collection</item>
             </argument>
         </arguments>
     </type>

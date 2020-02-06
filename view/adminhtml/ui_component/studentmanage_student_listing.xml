@@ -10,21 +10,21 @@
 <listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
     <argument name="data" xsi:type="array">
         <item name="js_config" xsi:type="array">
-            <item name="provider" xsi:type="string">lof_hieustudentmanage_index_listing.lof_hieustudentmanage_index_listing_data_source</item>
+            <item name="provider" xsi:type="string">studentmanage_student_listing.studentmanage_student_listing_data_source</item>
         </item>
     </argument>
     <settings>
-        <spinner>lof_hieustudentmanage_index_columns</spinner>
+        <spinner>studentmanage_student_columns</spinner>
         <deps>
-            <dep>lof_hieustudentmanage_index_listing.lof_hieustudentmanage_index_listing_data_source</dep>
+            <dep>studentmanage_student_listing.studentmanage_student_listing_data_source</dep>
         </deps>
     </settings>
-    <dataSource component="Magento_Ui/js/grid/provider" name="lof_hieustudentmanage_index_listing_data_source">
+    <dataSource component="Magento_Ui/js/grid/provider" name="studentmanage_student_listing_data_source">
         <settings>
             <updateUrl path="mui/index/render"/>
         </settings>
-        <aclResource>Lof_HieuStudentManage::Index</aclResource>
-        <dataProvider class="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider" name="lof_hieustudentmanage_index_listing_data_source">
+        <aclResource>Lof_HieuStudentManage::Student</aclResource>
+        <dataProvider class="Mage   nto\Framework\View\Element\UiComponent\DataProvider\DataProvider" name="studentmanage_student_listing_data_source">
             <settings>
                 <requestFieldName>id</requestFieldName>
                 <primaryFieldName>student_id</primaryFieldName>
@@ -40,7 +40,7 @@
         <filters name="listing_filters"/>
         <paging name="listing_paging"/>
     </listingToolbar>
-    <columns name="lof_hieustudentmanage_index_columns">
+    <columns name="studentmanage_index_columns">
         <selectionsColumn name="ids">
             <settings>
                 <indexField>index_id</indexField>
@@ -61,3 +61,4 @@
         </column>
     </columns>
 </listing>
+

@@ -12,10 +12,10 @@
     <preference for="Lof\HieuStudentManage\Api\IndexRepositoryInterface" type="Lof\HieuStudentManage\Model\IndexRepository"/>
     <preference for="Lof\HieuStudentManage\Api\Data\IndexInterface" type="Lof\HieuStudentManage\Model\Data\Index"/>
     <preference for="Lof\HieuStudentManage\Api\Data\IndexSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
-    <virtualType name="Lof\HieuStudentManage\Model\ResourceModel\Index\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+    <virtualType name="Lof\HieuStudentManage\Model\ResourceModel\Student\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
         <arguments>
             <argument name="mainTable" xsi:type="string">hieustudentmanage_studentinfo</argument>
-            <argument name="resourceModel" xsi:type="string">Lof\HieuStudentManage\Model\ResourceModel\Student\</argument>
+            <argument name="resourceModel" xsi:type="string">Lof\HieuStudentManage\Model\ResourceModel\Student\Collection</argument>
         </arguments>
     </virtualType>
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">

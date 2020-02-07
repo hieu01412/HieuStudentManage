@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 /**
- * lof_hieustudentmanage_index_listing
+ * studentmanage_index_listing
  *
  * @copyright Copyright © 2020 landofcoder. All rights reserved.
  * @author    landofcoder@gmail.com
@@ -27,39 +27,33 @@
             <dep>studentmanage_student_listing.studentmanage_student_listing_data_source</dep>
         </deps>
     </settings>
-    <!--    <listingToolbar name="listing_top">
+        <listingToolbar name="listing_top">
         <argument name="data" xsi:type="array">
             <item name="config" xsi:type="array">
                 <item name="sticky" xsi:type="boolean">true</item>
             </item>
         </argument>
         <columnsControls name="columns_controls"/>
-        <filterSearch name="fulltext"/>
         <filters name="listing_filters" />
         <exportButton name="export_button"/>
-
-        <massaction name="listing_massaction">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="component" xsi:type="string">Magento_Ui/js/grid/tree-massactions</item>
-                </item>
-            </argument>
+        <massaction name="listing_massaction"
+                    component="Magento_Ui/js/grid/tree-massactions"
+                    class="\Lof\HieuStudentManage\Ui\Component\Student\MassActions">
             <action name="delete">
                 <argument name="data" xsi:type="array">
                     <item name="config" xsi:type="array">
                         <item name="type" xsi:type="string">delete</item>
                         <item name="label" xsi:type="string" translate="true">Delete</item>
-                        <item name="url" xsi:type="url" path="mageplaza_helloworld/post/massDelete"/>
+                        <item name="url" xsi:type="url" path="studentmanage/student/massdelete"/>
                         <item name="confirm" xsi:type="array">
-                            <item name="title" xsi:type="string" translate="true">Delete Post</item>
+                            <item name="title" xsi:type="string" translate="true">Delete items</item>
                             <item name="message" xsi:type="string" translate="true">Are you sure you wan't to delete selected items?</item>
                         </item>
                     </item>
                 </argument>
             </action>
         </massaction>
-    </listingToolbar>-->
-
+    </listingToolbar>
     <dataSource component="Magento_Ui/js/grid/provider" name="studentmanage_student_listing_data_source">
         <settings>
             <storageConfig>
@@ -75,33 +69,22 @@
             </settings>
         </dataProvider>
     </dataSource>
-
-
     <columns name="studentmanage_student_columns">
         <settings>
-            <editorConfig>
-                <param name="clientConfig" xsi:type="array">
-                    <item name="saveUrl" xsi:type="url" path="cms/page/inlineEdit"/>
-                    <item name="validateBeforeSave" xsi:type="boolean">false</item>
-                </param>
-                <param name="indexField" xsi:type="string">student_id</param>
-                <param name="enabled" xsi:type="boolean">true</param>
-                <param name="selectProvider" xsi:type="string">studentmanage_student_listing.studentmanage_student_listing.studentmanage_student_columns.ids</param>
-            </editorConfig>
             <childDefaults>
                 <param name="fieldAction" xsi:type="array">
-                    <item name="provider" xsi:type="string">studentmanage_student_listing.studentmanage_student_listing.studentmanage_student_columns_editor</item>
-                    <item name="target" xsi:type="string">startEdit</item>
+                    <item name="provider" xsi:type="string">studentmanage_student_listing.studentmanage_student_listing.studentmanage_student_columns.actions</item>
+                    <item name="target" xsi:type="string">applyAction</item>
                     <item name="params" xsi:type="array">
-                        <item name="0" xsi:type="string">${ $.$data.rowIndex }</item>
-                        <item name="1" xsi:type="boolean">true</item>
+                        <item name="0" xsi:type="string">edit</item>
+                        <item name="1" xsi:type="string">${ $.$data.rowIndex }</item>
                     </item>
                 </param>
             </childDefaults>
         </settings>
         <selectionsColumn name="ids">
             <settings>
-                <indexField>index_id</indexField>
+                <indexField>student_id</indexField>
             </settings>
         </selectionsColumn>
         <column name="student_id">
@@ -141,6 +124,11 @@
                 <label translate="true">Phone Number</label>
             </settings>
         </column>
+        <actionsColumn name="actions" class="Lof\HieuStudentManage\Ui\Component\Listing\Column\StudentGroupActions" sortOrder="200">
+            <settings>
+                <indexField>student_id</indexField>
+            </settings>
+        </actionsColumn>
     </columns>
 </listing>
 

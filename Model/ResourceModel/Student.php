@@ -16,4 +16,14 @@ class Student extends AbstractDb
     {
         $this->_init('hieustudentmanage_studentinfo', 'student_id');
     }
+
+
+    public function load(\Magento\Framework\Model\AbstractModel $object, $value, $field = null)
+    {
+        if (!is_numeric($value) && is_null($field)) {
+            $field = 'name';
+        }
+
+        return parent::load($object, $value, $field);
+    }
 }

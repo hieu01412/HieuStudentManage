@@ -13,6 +13,20 @@ class Student extends AbstractModel implements IdentityInterface
 
     protected $_eventPrefix = 'hieustudentmanage_studentinfo';
 
+    protected $_urlBuilder;
+
+    public function __construct(
+        \Magento\Framework\Model\Context $context,
+        \Magento\Framework\Registry $registry,
+        \Magento\Framework\UrlInterface $urlBuilder,
+        \Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
+        \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
+        array $data = []
+    ) {
+        $this->_urlBuilder = $urlBuilder;
+        parent::__construct($context, $registry, $resource, $resourceCollection, $data);
+    }
+
     protected function _construct()
     {
         $this->_init('Lof\HieuStudentManage\Model\ResourceModel\Student');
@@ -28,5 +42,15 @@ class Student extends AbstractModel implements IdentityInterface
         $values = [];
 
         return $values;
+    }
+
+    public function getId()
+    {
+        return $this->getData(self::STUDENT_ID);
+    }
+
+    public function setId($id)
+    {
+        return $this->setData(self::STUDENT_ID, $id);
     }
 }

@@ -58,7 +58,7 @@ class InstallSchema implements InstallSchemaInterface
                     null,
                     [
                         'nullable' => false,
-                        'default' => \Magento\Framework\DB\Ddl\Table::TYPE_DATE
+                        \Magento\Framework\DB\Ddl\Table::TYPE_DATE,
                     ],
                     'Date of Birth'
                 )

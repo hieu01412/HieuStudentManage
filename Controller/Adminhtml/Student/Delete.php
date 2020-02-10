@@ -3,10 +3,10 @@
 
 namespace Lof\HieuStudentManage\Controller\Adminhtml\Student;
 
-use Magento\Framework\App\Action\HttpPostActionInterface;
-use Magento\Framework\Exception\NoSuchEntityException;
+use Magento\Backend\App\Action;
+use Magento\TestFramework\ErrorLog\Logger;
 
-class Delete
+class Delete extends Action
 {
 
     /**
@@ -14,23 +14,29 @@ class Delete
      *
      * @return \Magento\Framework\Controller\ResultInterface
      */
+    protected function _isAllowed()
+    {
+        return $this->_authorization->isAllowed('Lof_HieuStudentManage::delete');
+    }
+
     public function execute()
     {
-        $id = $this->getRequest()->getParam('id');
+        $id = $this->getRequest()->getParam('student_id');
         /** @var \Magento\Backend\Model\View\Result\Redirect $resultRedirect */
         $resultRedirect = $this->resultRedirectFactory->create();
         if ($id) {
             try {
-                $this->groupRepository->deleteById($id);
-                $this->messageManager->addSuccess(__('You deleted the Student.'));
-            } catch (NoSuchEntityException $e) {
-                $this->messageManager->addError(__('The Student no longer exists.'));
-                return $resultRedirect->setPath('studentmanage/*/');
+                $model=$this->_objectManager->create(\Lof\HieuStudentManage\Model\Student::class);
+                $model->load($id);
+                $model->delete();
+                $this->messageManager->addSuccess(__('The student has been deleted.'));
+                return $resultRedirect->setPath('*/*/');
             } catch (\Exception $e) {
                 $this->messageManager->addError($e->getMessage());
-                return $resultRedirect->setPath('studentmanage/student/edit', ['id' => $id]);
+                return $resultRedirect->setPath('*/*/edit', ['student_id' => $id]);
             }
         }
-        return $resultRedirect->setPath('studentmanage/student');
+        $this->messageManager->addError(__('We can\'t find a post to delete.'));
+        return $resultRedirect->setPath('*/*/');
     }
 }

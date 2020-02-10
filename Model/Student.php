@@ -44,13 +44,4 @@ class Student extends AbstractModel implements IdentityInterface
         return $values;
     }
 
-    public function getId()
-    {
-        return $this->getData(self::STUDENT_ID);
-    }
-
-    public function setId($id)
-    {
-        return $this->setData(self::STUDENT_ID, $id);
-    }
 }

@@ -1,42 +1,42 @@
 <?php
 
-
 namespace Lof\HieuStudentManage\Controller\Adminhtml\Student;
 
-use Magento\Backend\App\Action;
-use Magento\TestFramework\ErrorLog\Logger;
+use Magento\Framework\App\Action\HttpPostActionInterface;
 
-class Delete extends Action
+class Delete extends \Lof\HieuStudentManage\Controller\Adminhtml\Student implements HttpPostActionInterface
 {
-
     /**
      * Delete action
      *
      * @return \Magento\Framework\Controller\ResultInterface
      */
-    protected function _isAllowed()
-    {
-        return $this->_authorization->isAllowed('Lof_HieuStudentManage::delete');
-    }
-
     public function execute()
     {
-        $id = $this->getRequest()->getParam('student_id');
         /** @var \Magento\Backend\Model\View\Result\Redirect $resultRedirect */
         $resultRedirect = $this->resultRedirectFactory->create();
+        // check if we know what should be deleted
+        $id = $this->getRequest()->getParam('id');
         if ($id) {
             try {
-                $model=$this->_objectManager->create(\Lof\HieuStudentManage\Model\Student::class);
+                // init model and delete
+                $model = $this->_objectManager->create(\Lof\HieuStudentManage\Model\Student::class);
                 $model->load($id);
                 $model->delete();
-                $this->messageManager->addSuccess(__('The student has been deleted.'));
+                // display success message
+                $this->messageManager->addSuccessMessage(__('You deleted the student.'));
+                // go to grid
                 return $resultRedirect->setPath('*/*/');
             } catch (\Exception $e) {
-                $this->messageManager->addError($e->getMessage());
+                // display error message
+                $this->messageManager->addErrorMessage($e->getMessage());
+                // go back to edit form
                 return $resultRedirect->setPath('*/*/edit', ['student_id' => $id]);
             }
         }
-        $this->messageManager->addError(__('We can\'t find a post to delete.'));
+        // display error message
+        $this->messageManager->addErrorMessage(__('We can\'t find a student to delete.'));
+        // go to grid
         return $resultRedirect->setPath('*/*/');
     }
 }

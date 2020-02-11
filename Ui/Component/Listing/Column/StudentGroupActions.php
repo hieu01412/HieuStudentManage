@@ -53,8 +53,7 @@ class StudentGroupActions extends Column
         Escaper $escaper,
         array $components = [],
         array $data = []
-    )
-    {
+    ) {
         $this->urlBuilder = $urlBuilder;
         $this->escaper = $escaper;
         parent::__construct($context, $uiComponentFactory, $components, $data);
@@ -77,7 +76,7 @@ class StudentGroupActions extends Column
                             'href' => $this->urlBuilder->getUrl(
                                 static::URL_PATH_EDIT,
                                 [
-                                    'id' => $item['student_id']
+                                    'student_id' => $item['student_id']
                                 ]
                             ),
                             'label' => __('Edit'),
@@ -94,7 +93,7 @@ class StudentGroupActions extends Column
                         'href' => $this->urlBuilder->getUrl(
                             static::URL_PATH_DELETE,
                             [
-                                'id' => $item['student_id']
+                                'student_id' => $item['student_id']
                             ]
                         ),
                         'label' => __('Delete'),

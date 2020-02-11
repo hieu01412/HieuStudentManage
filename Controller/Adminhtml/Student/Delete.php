@@ -16,7 +16,7 @@ class Delete extends \Lof\HieuStudentManage\Controller\Adminhtml\Student impleme
         /** @var \Magento\Backend\Model\View\Result\Redirect $resultRedirect */
         $resultRedirect = $this->resultRedirectFactory->create();
         // check if we know what should be deleted
-        $id = $this->getRequest()->getParam('id');
+        $id = $this->getRequest()->getParam('student_id');
         if ($id) {
             try {
                 // init model and delete

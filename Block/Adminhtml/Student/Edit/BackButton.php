@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright (c) 2019 lanofcoder
  *
@@ -21,42 +22,38 @@
  * SOFTWARE.
  */
 
-namespace Lof\HieuStudentManage\Controller\Adminhtml;
+namespace Lof\HieuStudentManage\Block\Adminhtml\Student\Edit;
+
+use Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;
 
 /**
- * Class StudentManageList
+ * Class BackButton
  *
- * @package Lof\StudentManageList\Controller\Adminhtml
+ * @package Lof\StudentManageList\Block\Adminhtml\StudentManageList\Edit
  */
-abstract class Student extends \Magento\Backend\App\Action
+class BackButton extends GenericButton implements ButtonProviderInterface
 {
 
-    const ADMIN_RESOURCE = 'Lof_StudentManageList::top_level';
-    protected $_coreRegistry;
-
     /**
-     * @param \Magento\Backend\App\Action\Context $context
-     * @param \Magento\Framework\Registry $coreRegistry
+     * @return array
      */
-    public function __construct(
-        \Magento\Backend\App\Action\Context $context,
-        \Magento\Framework\Registry $coreRegistry
-    ) {
-        $this->_coreRegistry = $coreRegistry;
-        parent::__construct($context);
+    public function getButtonData()
+    {
+        return [
+            'label' => __('Back'),
+            'on_click' => sprintf("location.href = '%s';", $this->getBackUrl()),
+            'class' => 'back',
+            'sort_order' => 10
+        ];
     }
 
     /**
-     * Init page
+     * Get URL for back (reset) button
      *
-     * @param \Magento\Backend\Model\View\Result\Page $resultPage
-     * @return \Magento\Backend\Model\View\Result\Page
+     * @return string
      */
-    public function initPage($resultPage)
+    public function getBackUrl()
     {
-        $resultPage->setActiveMenu(self::ADMIN_RESOURCE)
-            ->addBreadcrumb(__('Lof'), __('Lof'))
-            ->addBreadcrumb(__('Studentmanagelist'), __('Studentmanagelist'));
-        return $resultPage;
+        return $this->getUrl('*/*/');
     }
 }

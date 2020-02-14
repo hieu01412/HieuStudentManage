@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright (c) 2019 lanofcoder
  *
@@ -21,42 +22,47 @@
  * SOFTWARE.
  */
 
-namespace Lof\HieuStudentManage\Controller\Adminhtml;
+namespace Lof\HieuStudentManage\Block\Adminhtml\Student\Edit;
+
+use Magento\Backend\Block\Widget\Context;
 
 /**
- * Class StudentManageList
+ * Class GenericButton
  *
- * @package Lof\StudentManageList\Controller\Adminhtml
+ * @package Lof\StudentManageList\Block\Adminhtml\StudentManageList\Edit
  */
-abstract class Student extends \Magento\Backend\App\Action
+abstract class GenericButton
 {
 
-    const ADMIN_RESOURCE = 'Lof_StudentManageList::top_level';
-    protected $_coreRegistry;
+    protected $context;
 
     /**
-     * @param \Magento\Backend\App\Action\Context $context
-     * @param \Magento\Framework\Registry $coreRegistry
+     * @param \Magento\Backend\Block\Widget\Context $context
      */
-    public function __construct(
-        \Magento\Backend\App\Action\Context $context,
-        \Magento\Framework\Registry $coreRegistry
-    ) {
-        $this->_coreRegistry = $coreRegistry;
-        parent::__construct($context);
+    public function __construct(Context $context)
+    {
+        $this->context = $context;
     }
 
     /**
-     * Init page
+     * Return model ID
      *
-     * @param \Magento\Backend\Model\View\Result\Page $resultPage
-     * @return \Magento\Backend\Model\View\Result\Page
+     * @return int|null
      */
-    public function initPage($resultPage)
+    public function getModelId()
     {
-        $resultPage->setActiveMenu(self::ADMIN_RESOURCE)
-            ->addBreadcrumb(__('Lof'), __('Lof'))
-            ->addBreadcrumb(__('Studentmanagelist'), __('Studentmanagelist'));
-        return $resultPage;
+        return $this->context->getRequest()->getParam('student_id');
+    }
+
+    /**
+     * Generate url by route and parameters
+     *
+     * @param string $route
+     * @param array $params
+     * @return  string
+     */
+    public function getUrl($route = '', $params = [])
+    {
+        return $this->context->getUrlBuilder()->getUrl($route, $params);
     }
 }

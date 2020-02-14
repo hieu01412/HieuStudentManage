@@ -70,7 +70,7 @@ class StudentGroupActions extends Column
         if (isset($dataSource['data']['items'])) {
             foreach ($dataSource['data']['items'] as & $item) {
                 if (isset($item['student_id'])) {
-                    $title = $this->escaper->escapeHtml($item['name']);
+                    $title = $this->escaper->escapeHtmlAttr($item['name']);
                     $item[$this->getData('name')] = [
                         'edit' => [
                             'href' => $this->urlBuilder->getUrl(

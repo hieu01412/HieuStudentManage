@@ -2,57 +2,116 @@
 <form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
     <argument name="data" xsi:type="array">
         <item name="js_config" xsi:type="array">
-            <item name="provider" xsi:type="string">lof_studentmanagelist_studentmanagelist_form.studentmanagelist_form_data_source</item>
+            <item name="provider" xsi:type="string">studentmanage_student_form.studentmanage_student_form_data_source</item>
         </item>
         <item name="label" translate="true" xsi:type="string">General Information</item>
         <item name="template" xsi:type="string">templates/form/collapsible</item>
     </argument>
     <settings>
         <buttons>
-            <button class="Lof\StudentManageList\Block\Adminhtml\StudentManageList\Edit\BackButton" name="back"/>
-            <button class="Lof\StudentManageList\Block\Adminhtml\StudentManageList\Edit\DeleteButton" name="delete"/>
-            <button class="Lof\StudentManageList\Block\Adminhtml\StudentManageList\Edit\SaveButton" name="save"/>
-            <button class="Lof\StudentManageList\Block\Adminhtml\StudentManageList\Edit\SaveAndContinueButton" name="save_and_continue"/>
+            <button class="Lof\HieuStudentManage\Block\Adminhtml\Student\Edit\BackButton" name="back"/>
+<!--            <button class="Lof\HieuStudentManage\Block\Adminhtml\Student\Edit\DeleteButton" name="delete"/>-->
+            <button class="Lof\HieuStudentManage\Block\Adminhtml\Student\Edit\SaveButton" name="save"/>
+<!--            <button class="Lof\HieuStudentManage\Block\Adminhtml\Student\Edit\SaveAndContinueButton" name="save_and_continue"/>-->
         </buttons>
-        <namespace>lof_studentmanagelist_studentmanagelist_form</namespace>
+        <namespace>studentmanage_student_form</namespace>
         <dataScope>data</dataScope>
         <deps>
-            <dep>lof_studentmanagelist_studentmanagelist_form.studentmanagelist_form_data_source</dep>
+            <dep>studentmanage_student_form.studentmanage_student_form_data_source</dep>
         </deps>
     </settings>
-    <dataSource name="studentmanagelist_form_data_source">
+    <dataSource name="studentmanage_student_form_data_source">
         <argument name="data" xsi:type="array">
             <item name="js_config" xsi:type="array">
                 <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
             </item>
         </argument>
         <settings>
-            <submitUrl path="*/*/save"/>
+            <submitUrl path="studentmanage/student/save"/>
         </settings>
-        <dataProvider class="Lof\StudentManageList\Model\StudentManageList\DataProvider" name="studentmanagelist_form_data_source">
+        <dataProvider class="Lof\HieuStudentManage\Model\Student\DataProvider" name="studentmanage_student_form_data_source">
             <settings>
-                <requestFieldName>studentmanagelist_id</requestFieldName>
-                <primaryFieldName>studentmanagelist_id</primaryFieldName>
+                <requestFieldName>student_id</requestFieldName>
+                <primaryFieldName>student_id</primaryFieldName>
             </settings>
         </dataProvider>
     </dataSource>
     <fieldset name="general">
         <settings>
-            <label>General</label>
+            <label translate="true">Student Information</label>
         </settings>
-        <field formElement="textarea" name="student_id" sortOrder="10">
+            <input  name="name" sortOrder="10">
+                <settings>
+                    <dataType>text</dataType>
+                    <label translate="true">Name</label>
+                    <dataScope>name</dataScope>
+                    <elementTmpl>ui/form/element/input</elementTmpl>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">false</rule>
+                    </validation>
+                </settings>
+            </input>
+            <input  name="address" sortOrder="20">
+                <settings>
+                    <dataType>address</dataType>
+                    <label translate="true">Address</label>
+                    <dataScope>address</dataScope>
+                    <elementTmpl>ui/form/element/input</elementTmpl>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">false</rule>
+                    </validation>
+                </settings>
+            </input>
+        <field name="gender" formElement="select">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Gender</label>
+                <dataScope>gender</dataScope>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options>
+                            <option name="1" xsi:type="array">
+                                <item name="value" xsi:type="string">1</item>
+                                <item name="label" xsi:type="string">Male</item>
+                            </option>
+                            <option name="2" xsi:type="array">
+                                <item name="value" xsi:type="string">0</item>
+                                <item name="label" xsi:type="string">Female</item>
+                            </option>
+                        </options>
+                        <caption translate="true">-- Please Select --</caption>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+        <field name="date_example" formElement="date">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="source" xsi:type="string">StudentManageList</item>
+                    <item name="source" xsi:type="string">some_source</item>
                 </item>
             </argument>
             <settings>
+                <validation>
+                    <rule name="validate-date" xsi:type="boolean">true</rule>
+                </validation>
                 <dataType>text</dataType>
-                <label translate="true">student_id</label>
-                <dataScope>student_id</dataScope>
+                <label translate="true">Date Of Birth</label>
+                <visible>true</visible>
+                <dataScope>dateofbirth</dataScope>
+            </settings>
+        </field>
+        <field formElement="input"  name="phonenumber" sortOrder="100">
+            <settings>
+                <dataType>address</dataType>
+                <label translate="true">Phone Number</label>
+                <dataScope>phonenumber</dataScope>
+                <elementTmpl>ui/form/element/input</elementTmpl>
                 <validation>
                     <rule name="required-entry" xsi:type="boolean">false</rule>
                 </validation>
+                <validate>validate-number</validate>
             </settings>
         </field>
     </fieldset>

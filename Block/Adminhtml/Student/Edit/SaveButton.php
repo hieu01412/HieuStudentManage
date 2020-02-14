@@ -21,42 +21,26 @@
  * SOFTWARE.
  */
 
-namespace Lof\HieuStudentManage\Controller\Adminhtml;
+namespace Lof\HieuStudentManage\Block\Adminhtml\Student\Edit;
 
-/**
- * Class StudentManageList
- *
- * @package Lof\StudentManageList\Controller\Adminhtml
- */
-abstract class Student extends \Magento\Backend\App\Action
+use Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;
+
+class SaveButton extends GenericButton implements ButtonProviderInterface
 {
 
-    const ADMIN_RESOURCE = 'Lof_StudentManageList::top_level';
-    protected $_coreRegistry;
-
     /**
-     * @param \Magento\Backend\App\Action\Context $context
-     * @param \Magento\Framework\Registry $coreRegistry
+     * @return array
      */
-    public function __construct(
-        \Magento\Backend\App\Action\Context $context,
-        \Magento\Framework\Registry $coreRegistry
-    ) {
-        $this->_coreRegistry = $coreRegistry;
-        parent::__construct($context);
-    }
-
-    /**
-     * Init page
-     *
-     * @param \Magento\Backend\Model\View\Result\Page $resultPage
-     * @return \Magento\Backend\Model\View\Result\Page
-     */
-    public function initPage($resultPage)
+    public function getButtonData()
     {
-        $resultPage->setActiveMenu(self::ADMIN_RESOURCE)
-            ->addBreadcrumb(__('Lof'), __('Lof'))
-            ->addBreadcrumb(__('Studentmanagelist'), __('Studentmanagelist'));
-        return $resultPage;
+        return [
+            'label' => __('Save'),
+            'class' => 'save primary',
+            'data_attribute' => [
+                'mage-init' => ['button' => ['event' => 'save']],
+                'form-role' => 'save',
+            ],
+            'sort_order' => 90,
+        ];
     }
 }

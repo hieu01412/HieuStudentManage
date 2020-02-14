@@ -21,42 +21,35 @@
  * SOFTWARE.
  */
 
-namespace Lof\HieuStudentManage\Controller\Adminhtml;
+namespace Lof\HieuStudentManage\Controller\Adminhtml\Student;
 
-/**
- * Class StudentManageList
- *
- * @package Lof\StudentManageList\Controller\Adminhtml
- */
-abstract class Student extends \Magento\Backend\App\Action
+class NewAction extends \Lof\HieuStudentManage\Controller\Adminhtml\Student
 {
-
-    const ADMIN_RESOURCE = 'Lof_StudentManageList::top_level';
-    protected $_coreRegistry;
+    protected $resultForwardFactory;
 
     /**
      * @param \Magento\Backend\App\Action\Context $context
      * @param \Magento\Framework\Registry $coreRegistry
+     * @param \Magento\Backend\Model\View\Result\ForwardFactory $resultForwardFactory
      */
     public function __construct(
         \Magento\Backend\App\Action\Context $context,
-        \Magento\Framework\Registry $coreRegistry
+        \Magento\Framework\Registry $coreRegistry,
+        \Magento\Backend\Model\View\Result\ForwardFactory $resultForwardFactory
     ) {
-        $this->_coreRegistry = $coreRegistry;
-        parent::__construct($context);
+        $this->resultForwardFactory = $resultForwardFactory;
+        parent::__construct($context, $coreRegistry);
     }
 
     /**
-     * Init page
+     * New action
      *
-     * @param \Magento\Backend\Model\View\Result\Page $resultPage
-     * @return \Magento\Backend\Model\View\Result\Page
+     * @return \Magento\Framework\Controller\ResultInterface
      */
-    public function initPage($resultPage)
+    public function execute()
     {
-        $resultPage->setActiveMenu(self::ADMIN_RESOURCE)
-            ->addBreadcrumb(__('Lof'), __('Lof'))
-            ->addBreadcrumb(__('Studentmanagelist'), __('Studentmanagelist'));
-        return $resultPage;
+        /** @var \Magento\Framework\Controller\Result\Forward $resultForward */
+        $resultForward = $this->resultForwardFactory->create();
+        return $resultForward->forward('edit');
     }
 }

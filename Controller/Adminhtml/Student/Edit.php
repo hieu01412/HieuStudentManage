@@ -1,101 +1,85 @@
 <?php
+/**
+ * Copyright (c) 2019 lanofcoder
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
 
 namespace Lof\HieuStudentManage\Controller\Adminhtml\Student;
 
-use Magento\Backend\App\Action;
-
-class Edit extends \Magento\Backend\App\Action
+/**
+ * Class Edit
+ *
+ * @package Lof\StudentManageList\Controller\Adminhtml\StudentManageList
+ */
+class Edit extends \Lof\HieuStudentManage\Controller\Adminhtml\Student
 {
-    /**
-     * Core registry
-     *
-     * @var \Magento\Framework\Registry
-     */
-    protected $_coreRegistry = null;
-
-    /**
-     * @var \Magento\Framework\View\Result\PageFactory
-     */
     protected $resultPageFactory;
 
     /**
-     * @param Action\Context $context
+     * @param \Magento\Backend\App\Action\Context $context
+     * @param \Magento\Framework\Registry $coreRegistry
      * @param \Magento\Framework\View\Result\PageFactory $resultPageFactory
-     * @param \Magento\Framework\Registry $registry
      */
     public function __construct(
-        Action\Context $context,
-        \Magento\Framework\View\Result\PageFactory $resultPageFactory,
-        \Magento\Framework\Registry $registry
+        \Magento\Backend\App\Action\Context $context,
+        \Magento\Framework\Registry $coreRegistry,
+        \Magento\Framework\View\Result\PageFactory $resultPageFactory
     ) {
         $this->resultPageFactory = $resultPageFactory;
-        $this->_coreRegistry = $registry;
-        parent::__construct($context);
+        parent::__construct($context, $coreRegistry);
     }
 
     /**
-     * {@inheritdoc}
-     */
-    protected function _isAllowed()
-    {
-        return $this->_authorization->isAllowed('Lof_HieuStudentManage::save');
-    }
-
-    /**
-     * Init actions
+     * Edit action
      *
-     * @return \Magento\Backend\Model\View\Result\Page
-     */
-    protected function _initAction()
-    {
-        // load layout, set active menu and breadcrumbs
-        /** @var \Magento\Backend\Model\View\Result\Page $resultPage */
-        $resultPage = $this->resultPageFactory->create();
-        $resultPage->setActiveMenu('Lof_HieuStudentManage::post')
-            ->addBreadcrumb(__('Student'), __('Student'))
-            ->addBreadcrumb(__('Manage All Student'), __('Manage All Student'));
-        return $resultPage;
-    }
-
-    /**
-     * Edit Blog post
-     *
-     * @return \Magento\Backend\Model\View\Result\Page|\Magento\Backend\Model\View\Result\Redirect
-     * @SuppressWarnings(PHPMD.NPathComplexity)
+     * @return \Magento\Framework\Controller\ResultInterface
      */
     public function execute()
     {
+        // 1. Get ID and create model
         $id = $this->getRequest()->getParam('student_id');
         $model = $this->_objectManager->create(\Lof\HieuStudentManage\Model\Student::class);
 
+        // 2. Initial checking
         if ($id) {
             $model->load($id);
             if (!$model->getId()) {
-                $this->messageManager->addError(__('This post no longer exists.'));
-                /** \Magento\Backend\Model\View\Result\Redirect $resultRedirect */
+                $this->messageManager->addErrorMessage(__('This Studentmanagelist no longer exists.'));
+                /** @var \Magento\Backend\Model\View\Result\Redirect $resultRedirect */
                 $resultRedirect = $this->resultRedirectFactory->create();
-
                 return $resultRedirect->setPath('*/*/');
             }
         }
+        $this->_coreRegistry->register('lof_studentmanagelist_studentmanagelist', $model);
 
-        $data = $this->_objectManager->get('Magento\Backend\Model\Session')->getFormData(true);
-        if (!empty($data)) {
-            $model->setData($data);
-        }
-
-        $this->_coreRegistry->register('blog_post', $model);
-
+        // 3. Build edit form
         /** @var \Magento\Backend\Model\View\Result\Page $resultPage */
-        $resultPage = $this->_initAction();
-        $resultPage->addBreadcrumb(
-            $id ? __('Edit Student') : __('New Student'),
-            $id ? __('Edit Student') : __('New Student')
+        $resultPage = $this->resultPageFactory->create();
+        $this->initPage($resultPage)->addBreadcrumb(
+            $id ? __('Edit Studentmanagelist') : __('New Studentmanagelist'),
+            $id ? __('Edit Studentmanagelist') : __('New Studentmanagelist')
         );
-        $resultPage->getConfig()->getTitle()->prepend(__('Blog Posts'));
-        $resultPage->getConfig()->getTitle()
-            ->prepend($model->getId() ? $model->getTitle() : __('New Blog Post'));
+        $resultPage->getConfig()->getTitle()->prepend(__('Student'));
+        $resultPage->getConfig()->getTitle()->prepend($model->getId() ? __('%1', $model->getName()) : __('New Student'));
 
+//        $resultPage->getConfig()->getTitle()->prepend($model->getId() ? __('Edit Studentmanagelist %1', $model->getId()) : __('New Student'));
         return $resultPage;
     }
 }

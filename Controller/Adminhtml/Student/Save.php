@@ -1,6 +1,12 @@
 <?php
+/**
+ * Save
+ *
+ * @copyright Copyright © 2020 lanofcoder. All rights reserved.
+ * @author    lanofcoder@gmail.com
+ */
 
-namespace Lof\StudentManageList\Controller\Adminhtml\StudentManageList;
+namespace Lof\HieuStudentManage\Controller\Adminhtml\Student;
 
 use Magento\Framework\Exception\LocalizedException;
 
@@ -33,7 +39,7 @@ class Save extends \Magento\Backend\App\Action
         if ($data) {
             $id = $this->getRequest()->getParam('student_id');
 
-            $model = $this->_objectManager->create(\Lof\StudentManageList\Model\StudentManageList::class)->load($id);
+            $model = $this->_objectManager->create(\Lof\HieuStudentManage\Model\Student::class)->load($id);
             if (!$model->getId() && $id) {
                 $this->messageManager->addErrorMessage(__('This Student no longer exists.'));
                 return $resultRedirect->setPath('*/*/');
@@ -43,8 +49,8 @@ class Save extends \Magento\Backend\App\Action
 
             try {
                 $model->save();
-                $this->messageManager->addSuccessMessage(__('You saved the student.'));
-                $this->dataPersistor->clear('hieustudentmanage_studentinfo');
+                $this->messageManager->addSuccessMessage(__('You saved the Student.'));
+                $this->dataPersistor->clear('lof_hieustudentmanage_student');
 
                 if ($this->getRequest()->getParam('back')) {
                     return $resultRedirect->setPath('*/*/edit', ['student_id' => $model->getId()]);
@@ -56,7 +62,7 @@ class Save extends \Magento\Backend\App\Action
                 $this->messageManager->addExceptionMessage($e, __('Something went wrong while saving the Student.'));
             }
 
-            $this->dataPersistor->set('hieustudentmanage_studentinfo', $data);
+            $this->dataPersistor->set('lof_hieustudentmanage_student', $data);
             return $resultRedirect->setPath('*/*/edit', ['student_id' => $this->getRequest()->getParam('student_id')]);
         }
         return $resultRedirect->setPath('*/*/');

@@ -1,5 +1,5 @@
 <h1>Modue - HieuStudentManage</h1>
-###### What is this extension about?
+<b>What is this extension about?</b> 
 
 
 ###### Install Extension

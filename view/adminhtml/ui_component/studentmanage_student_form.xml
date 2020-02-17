@@ -40,29 +40,39 @@
         <settings>
             <label translate="true">Student Information</label>
         </settings>
-            <input  name="name" sortOrder="10">
+            <field formElement="input" name="name" sortOrder="10">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">student</item>
+                    </item>
+                </argument>
                 <settings>
                     <dataType>text</dataType>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                    </validation>
                     <label translate="true">Name</label>
                     <dataScope>name</dataScope>
                     <elementTmpl>ui/form/element/input</elementTmpl>
-                    <validation>
-                        <rule name="required-entry" xsi:type="boolean">false</rule>
-                    </validation>
                 </settings>
-            </input>
-            <input  name="address" sortOrder="20">
+            </field>
+            <input name="address" sortOrder="20">
                 <settings>
                     <dataType>address</dataType>
                     <label translate="true">Address</label>
                     <dataScope>address</dataScope>
                     <elementTmpl>ui/form/element/input</elementTmpl>
                     <validation>
-                        <rule name="required-entry" xsi:type="boolean">false</rule>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
                     </validation>
                 </settings>
             </input>
         <field name="gender" formElement="select">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">student</item>
+                </item>
+            </argument>
             <settings>
                 <dataType>text</dataType>
                 <label translate="true">Gender</label>
@@ -84,16 +94,17 @@
                         <caption translate="true">-- Please Select --</caption>
                     </settings>
                 </select>
-            </formElements>
+            </formElements>validate-number
         </field>
         <field name="date_example" formElement="date">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="source" xsi:type="string">some_source</item>
+                    <item name="source" xsi:type="string">student</item>
                 </item>
             </argument>
             <settings>
                 <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
                     <rule name="validate-date" xsi:type="boolean">true</rule>
                 </validation>
                 <dataType>text</dataType>
@@ -103,16 +114,21 @@
             </settings>
         </field>
         <field formElement="input"  name="phonenumber" sortOrder="100">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">student</item>
+                </item>
+            </argument>
             <settings>
-                <dataType>address</dataType>
+                <dataType>number</dataType>
                 <label translate="true">Phone Number</label>
                 <dataScope>phonenumber</dataScope>
                 <elementTmpl>ui/form/element/input</elementTmpl>
                 <validation>
-                    <rule name="required-entry" xsi:type="boolean">false</rule>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                    <rule name="validate-number" xsi:type="boolean">true</rule>
                 </validation>
-                <validate>validate-number</validate>
             </settings>
         </field>
     </fieldset>
-</form>
+</form>l

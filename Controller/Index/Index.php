@@ -24,7 +24,10 @@ class Index extends Action
         $post = $this->_postFactory->create();
         $collection =$post->getCollection();
         foreach ($collection as $item) {
-            var_dump($item->getData());
+//            var_dump($item->getData());
+            print_r('<pre>');
+                print_r($item->getData());
+            print_r('</pre>');
         }
         exit();
         return $this->_pageFactory->create();

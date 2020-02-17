@@ -1,4 +1,4 @@
-#Modue-HieuStudentManage
+#ModueHieuStudentManage
 
 ###### What is this extension about?
 

@@ -7,29 +7,20 @@ class Index extends Action
 {
     protected $_pageFactory;
 
-    protected $_postFactory;
+    protected $_studentFactory;
 
     public function __construct(
         \Magento\Framework\App\Action\Context $context,
         \Magento\Framework\View\Result\PageFactory $pageFactory,
-        \Lof\HieuStudentManage\Model\StudentFactory $postFactory
+        \Lof\HieuStudentManage\Model\StudentFactory $studentFactory
     ) {
         $this->_pageFactory = $pageFactory;
-        $this->_postFactory = $postFactory;
+        $this->_studentFactory = $studentFactory;
         return parent::__construct($context);
     }
 
     public function execute()
     {
-        $post = $this->_postFactory->create();
-        $collection =$post->getCollection();
-        foreach ($collection as $item) {
-//            var_dump($item->getData());
-            print_r('<pre>');
-                print_r($item->getData());
-            print_r('</pre>');
-        }
-        exit();
         return $this->_pageFactory->create();
     }
 }

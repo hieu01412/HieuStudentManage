@@ -1,0 +1,26 @@
+<?php
+?>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Gender</th>
+        <th>Address</th>
+        <th>Date Of Birth</th>
+        <th>Phone Number</th>
+    </tr>
+    <?php foreach ($block->getStudentCollection() as $key => $student) { ?>
+        <tr>
+            <td><?php echo $student->getId() ?></td>
+            <td><?php echo $student->getName() ?></td>
+            <td><?php echo $student->getGender() ?></td>
+            <td><?php echo $student->getAddress() ?></td>
+            <td><?php echo $student->getDateofbirth() ?></td>
+            <td><?php echo $student->getPhonenumber() ?></td>
+        </tr>
+        <?php
+    }
+    ?>
+
+</table>

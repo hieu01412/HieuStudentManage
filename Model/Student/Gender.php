@@ -58,6 +58,7 @@ class Gender extends \Magento\Framework\DataObject implements OptionSourceInterf
         }
         return $res;
     }
+
     public static function getOptionText($optionId)
     {
         $options = self::getOptionArray();

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * widget
+ *
+ * @copyright Copyright © 2020 Landofcoder. All rights reserved.
+ * @author    landofcoder@gmail.com
+ */
+-->
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+    <widget id="lof_hieustudentmanage_student" class="Lof\HieuStudentManage\Block\Widget\Student">
+        <label translate="true">Student List</label>
+        <description>list</description>
+        <parameters>
+            <parameter name="student" xsi:type="text" visible="true" sort_order="10" >
+                <label translate="true">Custom Student</label>
+            </parameter>
+        </parameters>
+    </widget>
+</widgets>

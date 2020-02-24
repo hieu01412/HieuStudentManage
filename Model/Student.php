@@ -2,10 +2,11 @@
 
 namespace Lof\HieuStudentManage\Model;
 
+use Lof\HieuStudentManage\Api\Data\StudentInterface;
 use Magento\Framework\DataObject\IdentityInterface;
 use Magento\Framework\Model\AbstractModel;
 
-class Student extends AbstractModel implements IdentityInterface
+class Student extends AbstractModel
 {
     const CACHE_TAG = 'hieustudentmanage_studentinfo';
 
@@ -29,7 +30,7 @@ class Student extends AbstractModel implements IdentityInterface
 
     protected function _construct()
     {
-        $this->_init('Lof\HieuStudentManage\Model\ResourceModel\Student');
+        $this->_init(\Lof\HieuStudentManage\Model\ResourceModel\Student::class);
     }
 
     public function getIdentities()

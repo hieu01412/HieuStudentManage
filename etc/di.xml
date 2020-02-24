@@ -9,9 +9,8 @@
 -->
 
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
-    <preference for="Lof\HieuStudentManage\Api\IndexRepositoryInterface" type="Lof\HieuStudentManage\Model\IndexRepository"/>
-    <preference for="Lof\HieuStudentManage\Api\StudentManageInterface" type="Lof\HieuStudentManage\Model\StudentManage"/>
-    <preference for="Lof\HieuStudentManage\Api\Data\IndexSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+    <preference for="Lof\HieuStudentManage\Api\StudentRepositoryInterface" type="Lof\HieuStudentManage\Model\StudentRepository"/>
+    <preference for="Lof\HieuStudentManage\Api\Data\StudentInterface" type="Lof\HieuStudentManage\Model\StudentRepository"/>
     <virtualType name="Lof\HieuStudentManage\Model\ResourceModel\Student\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
         <arguments>
             <argument name="mainTable" xsi:type="string">hieustudentmanage_studentinfo</argument>

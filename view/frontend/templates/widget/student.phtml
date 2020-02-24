@@ -3,11 +3,27 @@
 
 ?>
 <style>
+    table{
+        margin-bottom: 20px;
+    }
     table, tr,td,th{
         border: 1px solid #0a0a0a;
     }
+    .btn{
+        margin:10px 0;
+        color: red;
+    }
 </style>
 
+<?php if ($block->getData("widgettitle")):?>
+    <h3 class="student-title"><?php echo $block->getData('widgettitle');?></h3>
+<?php endif; ?>
+<div>
+    <form class="form-inline">
+        <input class="form-control s-student " type="search" placeholder="Search" aria-label="Search">
+        <button class="btn" type="submit">Search</button>
+    </form>
+</div>
 <table>
     <tr>
         <th>ID</th>
@@ -17,7 +33,7 @@
         <th>Date Of Birth</th>
         <th>Phone Number</th>
     </tr>
-    <?php foreach ($block->getStudentCollection() as $key => $student) { ?>
+    <?php foreach ($block->getStudentCollection() as $student) { ?>
         <tr>
             <td><?php echo $student->getId() ?></td>
             <td><?php echo $student->getName() ?></td>

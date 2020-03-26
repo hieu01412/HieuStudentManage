@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * widget
+ *
+ * @copyright Copyright © 2020 Landofcoder. All rights reserved.
+ * @author    landofcoder@gmail.com
+ */
+-->
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+    <widget id="studentManage" class="studentManage">
+        <label translate="true">Student Manage</label>
+        <description></description>
+        <parameters>
+        </parameters>
+    </widget>
+</widgets>

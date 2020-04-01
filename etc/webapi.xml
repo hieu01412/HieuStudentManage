@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * webapi
+ *
+ * @copyright Copyright © 2020 landofcoder. All rights reserved.
+ * @author    landofcoder@gmail.com
+ */
+-->
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <route url="/V1/lof-hieustudentmange/getstudent" method="GET">
+        <service class="Lof\HieuStudentManage\Api\StudentManagemantInterface" method="getStudentList"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+</routes>

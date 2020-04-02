@@ -94,7 +94,7 @@
                         <caption translate="true">-- Please Select --</caption>
                     </settings>
                 </select>
-            </formElements>validate-number
+            </formElements>
         </field>
         <field name="date_example" formElement="date">
             <argument name="data" xsi:type="array">

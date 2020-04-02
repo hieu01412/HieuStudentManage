@@ -1,4 +1,5 @@
 <?php
+
 namespace Lof\HieuStudentManage\Controller\Index;
 
 use Magento\Framework\App\Action\Action;
@@ -14,6 +15,7 @@ class Index extends Action
      */
     protected $pageFactory;
     protected $_studentFactory;
+
     /**
      * @param Context $context
      * @param PageFactory $pageFactory
@@ -37,7 +39,8 @@ class Index extends Action
         $collection->addFieldToSelect('*');
         $data = $collection->getData();
         header('Content-Type: application/json');
-        echo json_encode($data, JSON_UNESCAPED_UNICODE); die();
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
+        die();
 //        die();
 //        header('Content-Type: application/json');
 //        json_encode($collection);

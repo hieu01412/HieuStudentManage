@@ -11,7 +11,5 @@
     <widget id="studentManage" class="studentManage">
         <label translate="true">Student Manage</label>
         <description></description>
-        <parameters>
-        </parameters>
     </widget>
 </widgets>
